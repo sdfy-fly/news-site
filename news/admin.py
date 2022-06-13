@@ -1,14 +1,14 @@
 from django.contrib import admin
 from .models import News , Category
 
-# Register your models here.
-@admin.register(News)
-class NewsAdmin():
+class NewsAdmin(admin.ModelAdmin):
     list_display = ('id' , 'title' , 'content' , 'created_at')
     list_display_link = ('id' , 'title' )
 
 
-@admin.register(Category)
-class CategoryAdmin():
+class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id' , 'title' )
     list_display_link = ('id' , 'title' )
+
+admin.site.register(News , NewsAdmin)
+admin.site.register(Category , CategoryAdmin)

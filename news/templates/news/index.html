@@ -7,6 +7,24 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>hello world</h1>
+    <a href="/admin" target="_blank">admin</a>
+
+    <div class="cont">
+
+        {% for item in news%}
+
+        <div class="card" style="border: 2px solid red;">
+            <h2> {{item.title}} </h2>
+
+            <p> Category : {{ item.category }}</p>
+            <p>{{ item.content|linebreaks|truncatechars:300 }}</p>
+            <p>Date : {{ item.created_at }}</p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
 </body>
 </html>
