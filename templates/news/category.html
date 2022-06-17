@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{% static 'news/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'news/css/fonts.css' %}">
 
-    <title>Main Page</title>
+    <title>Category Page</title>
 
 </head>
 
@@ -27,7 +27,7 @@
         <div class="nav">
 
             {% for item in categories %}
-            <a href="/category/{{item.id}}" target="_blank"> {{ item.title }}</a>
+            <a href="/category/{{item.id}}" > {{ item.title }}</a>
             {% endfor %}
 
         </div>
