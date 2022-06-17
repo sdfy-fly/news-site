@@ -1,0 +1,27 @@
+h1,h2,p,body
+{
+    margin: 0px;
+    padding: 0px;
+}
+
+.card
+{
+    padding-top: 50px;
+    width: 1400px;
+}
+
+h2
+{
+    font-family: "SourceSemiBold";
+    font-size: 25px;
+    color : #1D1D1F;
+}
+
+.card p
+{
+    padding-top: 10px;
+    font-family: "SourceRegular";
+    font-size: 18px;
+    color : #1D1D1F;
+}
+
