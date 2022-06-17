@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,30 +11,44 @@
     <link rel="stylesheet" href="{% static 'news/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'news/css/fonts.css' %}">
 
-    <title>Document</title>
+    <title>Main Page</title>
+
 </head>
+
 <body>
-    
+
     <div class="header">
-        <a href="/admin" target="_blank">admin</a>
+        <a href="/" target="_blank">Home</a>
+        <a href="/admin" target="_blank">Admin</a>
+        <a href="/" target="_blank">More about us</a>
     </div>
 
     <div class="cont">
 
-        {% for item in news%}
-
-        <div class="card">
-            <h2> {{item.title}} </h2>
-
-            <p> Category : {{ item.category }}</p>
-            <p>{{ item.content|linebreaks|truncatechars:300 }}</p>
-            <p>Date : {{ item.created_at }}</p>
-
+        <div class="nav">
+            <a href="/category/" target="_blank">Культура</a>
+            <a href="/category/" target="_blank">Спорт</a>
+            <a href="/category/" target="_blank">Политика</a>
+            <a href="/category/" target="_blank">Наука</a>
+            <a href="/category/" target="_blank">Разное</a>
         </div>
 
-        {% endfor %}
+        <div class="main_cards">
 
+            {% for item in news%}
+            <div class="card">
+                <h2> {{item.title}} </h2>
+
+                <p> Category : {{ item.category }}</p>
+                <p>{{ item.content|linebreaks|truncatechars:300 }}</p>
+                <p>Date : {{ item.created_at }}</p>
+
+            </div>
+            {% endfor %}
+
+        </div>
     </div>
 
 </body>
+
 </html>

@@ -4,17 +4,47 @@ h1,h2,p,body
     padding: 0px;
 }
 
-.card
+.header
 {
-    padding-top: 50px;
-    width: 1400px;
+    display: flex;
+    padding-top: 20px;
+    flex-direction: row;
+    justify-content: center;
+    padding-bottom: 50px;
 }
 
-h2
+.header a 
 {
-    font-family: "SourceSemiBold";
-    font-size: 25px;
+    padding-left : 20px;
+    font-family: "SourceRegular";
+    font-size: 22px;
     color : #1D1D1F;
+    text-decoration: none;
+}
+
+.header a:hover
+{
+    text-decoration: underline #1D1D1F;
+}
+
+.cont
+{
+    display: flex;
+    justify-content: space-around;
+}
+
+.main_cards
+{
+    width: 900px;
+}
+
+
+.card
+{
+    margin-bottom: 50px;
+    padding: 10px;
+    border: 2px solid #1D1D1F;
+    border-radius: 25px;
 }
 
 .card p
@@ -25,3 +55,29 @@ h2
     color : #1D1D1F;
 }
 
+.card h2
+{
+    font-family: "SourceSemiBold";
+    font-size: 24px;
+    color : #1D1D1F;
+}
+
+.nav
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.nav a
+{
+    padding-top: 10px;
+    font-family: "SourceRegular";
+    font-size: 18px;
+    color : #1D1D1F;
+    text-decoration: none;
+}
+
+.nav a:hover
+{
+    text-decoration: underline #1D1D1F;
+}
