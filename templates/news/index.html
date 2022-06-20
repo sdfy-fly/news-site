@@ -10,42 +10,49 @@
     <link rel="stylesheet" href="{% static 'news/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'news/css/fonts.css' %}">
 
-    <title>Main Page</title>
+    <title>{% block title %}Main Page{% endblock %}</title>
 
 </head>
 
 <body>
 
+    {% block header %}
     <div class="header">
-        <a href="/" target="_blank">Home</a>
+        <a href="{% url 'home' %}" target="_blank">Home</a>
         <a href="/admin" target="_blank">Admin</a>
-        <a href="/" target="_blank">More about us</a>
+        <a href="{% url 'home' %}" target="_blank">More about us</a>
     </div>
+    {% endblock %}
+
 
     <div class="cont">
 
+        {% block sidebar %}
         <div class="nav">
 
             {% for item in categories %}
-            <a href="/category/{{item.id}}" target="_blank"> {{ item.title }}</a>
+            <a href="{% url 'category' item.id %}" > {{ item.title }}</a>
             {% endfor %}
 
         </div>
+        {% endblock %}
 
+        {% block content %}
         <div class="main_cards">
 
             {% for item in news%}
             <div class="card">
+                <a class="cardCategory" href="{% url 'category' item.category.id %}"> Категория : {{ item.category }}</a>
+
                 <h2> {{item.title}} </h2>
-
-                <p> Категория : {{ item.category }}</p>
                 <p>{{ item.content|linebreaks|truncatechars:300 }}</p>
-                <p>Date : {{ item.created_at }}</p>
-
+                <p>Дата публикации : {{ item.created_at }}</p>
+                <a href="{% url 'home' %}">Read more...</a>
             </div>
             {% endfor %}
 
         </div>
+        {% endblock %}
     </div>
 
 </body>

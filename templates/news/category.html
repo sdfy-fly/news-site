@@ -1,4 +1,9 @@
-{% load static %}
+{% extends 'news/index.html' %}
+
+{% block title %}Category Page{% endblock %}
+
+
+<!-- {% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,9 +22,9 @@
 <body>
 
     <div class="header">
-        <a href="/" target="_blank">Home</a>
+        <a href="{% url 'home' %}" target="_blank">Home</a>
         <a href="/admin" target="_blank">Admin</a>
-        <a href="/" target="_blank">More about us</a>
+        <a href="{% url 'home' %}" target="_blank">More about us</a>
     </div>
 
     <div class="cont">
@@ -27,7 +32,7 @@
         <div class="nav">
 
             {% for item in categories %}
-            <a href="/category/{{item.id}}" > {{ item.title }}</a>
+            <a href="{% url 'category' item.id %}" > {{ item.title }}</a>
             {% endfor %}
 
         </div>
@@ -40,7 +45,7 @@
 
                 <p> Категория : {{ item.category }}</p>
                 <p>{{ item.content|linebreaks|truncatechars:300 }}</p>
-                <p>Date : {{ item.created_at }}</p>
+                <p>Дата публикации : {{ item.created_at }}</p>
 
             </div>
             {% endfor %}
@@ -50,4 +55,5 @@
 
 </body>
 
-</html>
+</html> -->
+
