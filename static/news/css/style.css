@@ -69,6 +69,7 @@ h1,h2,p,body
 {
     font-size: 17px;
     text-decoration: underline #1D1D1F;
+    transition: 0.7s;
 }
 
 .card h2

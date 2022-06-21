@@ -1,0 +1,7 @@
+<div class="nav">
+
+    {% for item in categories %}
+    <a href="{% url 'category' item.id %}" > {{ item.title }}</a>
+    {% endfor %}
+
+</div>

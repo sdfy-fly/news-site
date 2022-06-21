@@ -17,29 +17,19 @@
 <body>
 
     {% block header %}
-    <div class="header">
-        <a href="{% url 'home' %}" target="_blank">Home</a>
-        <a href="/admin" target="_blank">Admin</a>
-        <a href="{% url 'home' %}" target="_blank">More about us</a>
-    </div>
+        {% include 'news/includes/_header.html' %}
     {% endblock %}
 
 
     <div class="cont">
 
         {% block sidebar %}
-        <div class="nav">
-
-            {% for item in categories %}
-            <a href="{% url 'category' item.id %}" > {{ item.title }}</a>
-            {% endfor %}
-
-        </div>
+            {% include 'news/includes/_sidebar.html' %}
         {% endblock %}
 
         {% block content %}
-        <div class="main_cards">
 
+        <div class="main_cards">
             {% for item in news%}
             <div class="card">
                 <a class="cardCategory" href="{% url 'category' item.category.id %}"> Категория : {{ item.category }}</a>
@@ -50,8 +40,8 @@
                 <a href="{% url 'home' %}">Read more...</a>
             </div>
             {% endfor %}
-
         </div>
+
         {% endblock %}
     </div>
 
