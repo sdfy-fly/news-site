@@ -1,0 +1,22 @@
+{% extends 'news/index.html' %}
+
+{% block title %}News Page{% endblock %}
+
+{% block content %}
+
+<div class="main_cards">
+
+    
+    <div class="card">
+        <a class="cardCategory" href="{{ news.category.get_absolute_url }}"> Категория : {{ news.category }}</a>
+
+        <h2> {{news.title}} </h2>
+        <p> {{ news.content|linebreaks }} </p>
+        <p> Дата публикации : {{ news.created_at }} </p>
+        <a href="{% url 'view_news' news.pk %}">Read more...</a>
+    </div>
+    
+
+</div>
+
+{% endblock %}

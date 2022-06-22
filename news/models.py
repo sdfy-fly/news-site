@@ -1,7 +1,7 @@
-from tabnanny import verbose
 from django.db import models
+from django.urls import reverse
 
-# Create your models here.
+
 class News(models.Model):
     title = models.CharField(max_length=150, verbose_name='Название')
     content = models.TextField(blank=True , verbose_name='Содержимое')
@@ -16,9 +16,13 @@ class News(models.Model):
         verbose_name_plural = 'Новости'
         ordering = ['-created_at']
 
+
 class Category(models.Model):
     title = models.CharField(max_length=150, verbose_name='Категория')
     
+    def get_absolute_url(self):
+        return reverse('category' , kwargs={"category_id" : self.pk})
+        
     def __str__(self) : 
         return self.title
 

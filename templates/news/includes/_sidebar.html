@@ -1,7 +1,11 @@
+{% load news_tags %}
+
 <div class="nav">
 
+    {% get_categories as categories %}
+
     {% for item in categories %}
-    <a href="{% url 'category' item.id %}" > {{ item.title }}</a>
+    <a href="{{ item.get_absolute_url }}" > {{ item.title }}</a>
     {% endfor %}
 
 </div>
