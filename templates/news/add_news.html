@@ -1,0 +1,36 @@
+{% extends 'news/index.html' %}
+{% load static %}
+
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'news/css/add_news.css' %}">
+{% endblock %}
+
+{% block title %}
+    Add new
+{% endblock %}
+
+{% block sidebar %}
+{%endblock%}
+
+
+
+{% block content %}
+
+    <div class="main_cards">
+   
+        <div class="form_card">
+            <h1>Добавление новости</h1>
+            <form method="post" class="form">
+
+                {% csrf_token %}
+                {{ form.as_p }}
+
+                <button type="submit" class="form_button">Добавить новость</button>
+        
+            </form>
+        </div>
+
+    </div>
+
+{% endblock %}

@@ -9,7 +9,7 @@
 
     <link rel="stylesheet" href="{% static 'news/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'news/css/fonts.css' %}">
-
+    {% block links %}{% endblock %}
     <title>{% block title %}Main Page{% endblock %}</title>
 
 </head>
@@ -37,7 +37,7 @@
                 <h2> {{item.title}} </h2>
                 <p> {{ item.content|linebreaks|truncatechars:300 }} </p>
                 <p> Дата публикации : {{ item.created_at }} </p>
-                <a href="{% url 'view_news' item.pk %}">Read more...</a>
+                <a href="{{ item.get_absolute_url }}">Read more...</a>
             </div>
             {% endfor %}
         </div>

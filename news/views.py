@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render , get_object_or_404 , redirect
 from .models import News , Category
-
+from .forms import NewsForm
 
 def index(request):
 
@@ -25,7 +25,34 @@ def get_category(request , category_id) :
 def view_news(request , news_id):
 
     context = {
-        'news' : News.objects.get(pk=news_id)
+        # 'news' : News.objects.get(pk=news_id)
+        'news' : get_object_or_404(News , pk=news_id)   
     }
 
     return render(request , 'news/view_news.html' , context)
+
+
+def add_news(request):
+    
+    if request.method == 'POST' :
+        form = NewsForm(request.POST)
+
+        if form.is_valid():
+            
+            title = form.cleaned_data['title']
+            content = form.cleaned_data['content']
+            category = form.cleaned_data['category']
+
+            new = News.objects.create( title=title , content=content , category=category)
+            # News.objects.create(**form.cleaned_data)
+            return redirect(new)
+            
+
+    else : 
+        form = NewsForm()
+    
+    context = {
+        'form' : form
+    }
+
+    return render(request , 'news/add_news.html' , context)

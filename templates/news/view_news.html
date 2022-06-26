@@ -13,7 +13,7 @@
         <h2> {{news.title}} </h2>
         <p> {{ news.content|linebreaks }} </p>
         <p> Дата публикации : {{ news.created_at }} </p>
-        <a href="{% url 'view_news' news.pk %}">Read more...</a>
+        <a href="{{ item.get_absolute_url }}">Read more...</a>
     </div>
     
 
