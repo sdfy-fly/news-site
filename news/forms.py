@@ -1,22 +1,27 @@
 from django import forms
-from .models import Category
+from .models import News
 
-class NewsForm(forms.Form):
-    title = forms.CharField(max_length=150, label='Название' , widget=forms.TextInput(
-        attrs={
-            "placeholder" : 'Введите название',
+import re
+from django.core.exceptions import ValidationError
+
+class NewsForm(forms.ModelForm):
+    class Meta: 
+        model = News
+        fields = ['title' , 'content' , 'category']
+        widgets = {
+            'title' : forms.TextInput( attrs={
+                'placeholder' : 'Введите название'
+            }) ,
+            'content' : forms.Textarea(attrs={
+                'placeholder' : 'Введите содержимое новости' ,
+                'rows' : 10, 
+                'cols' : 70
+            }),
+            'category' : forms.Select()
         }
-    ))
-    content = forms.CharField(label='Содержимое' , widget=forms.Textarea(
-        attrs={
-            "rows" : 10,
-            "cols" : 70,
-            "placeholder" : 'Введите содержимое новости'
-        }
-    ))
-    category = forms.ModelChoiceField(
-        queryset=Category.objects.all() , 
-        label='Категория' ,
-        empty_label=None,
-    )
-    
+
+    def clean_title(self):
+        title = self.cleaned_data['title']
+        if re.match(r'\d' , title) : 
+            raise ValidationError('Название не должно начинаться с цифры')
+        return title

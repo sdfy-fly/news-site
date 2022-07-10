@@ -36,18 +36,9 @@ def add_news(request):
     
     if request.method == 'POST' :
         form = NewsForm(request.POST)
-
         if form.is_valid():
-            
-            title = form.cleaned_data['title']
-            content = form.cleaned_data['content']
-            category = form.cleaned_data['category']
-
-            new = News.objects.create( title=title , content=content , category=category)
-            # News.objects.create(**form.cleaned_data)
-            return redirect(new)
-            
-
+            news = form.save()
+            return redirect(news)      
     else : 
         form = NewsForm()
     
