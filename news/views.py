@@ -1,27 +1,40 @@
 from django.shortcuts import render , get_object_or_404 , redirect
+from django.views.generic import ListView
+from django.core.paginator import Paginator
+
+
 from .models import News , Category
 from .forms import NewsForm
 
-def index(request):
-
-    context = {
-        'news' : News.objects.all() 
-    }
-
-    return render(request , 'news/index.html' , context)
+class HomeNews(ListView):
     
-
-def get_category(request , category_id) : 
+    """Класс для отображения всех новостей - главная страница"""
     
-    news = News.objects.filter(category=category_id)
+    model = News
+    template_name = 'news/index.html'
+    context_object_name = 'news'
+    paginate_by = 3
 
-    context = {
-        'news' : news ,
-    }
+    def get_context_data(self, **kwargs) :
+        context =  super().get_context_data(**kwargs)
+        return context
+    
+    def get_queryset(self) :
+        return News.objects.all()
 
-    return render(request , 'news/category.html' , context)
+class GetCategory(ListView):
 
+    """Класс для отображения страницы категорий новостей - страница категории"""
 
+    model = News
+    context_object_name = 'news'
+    template_name = 'news/category.html'
+    paginate_by = 3
+    allow_empty = False
+
+    def get_queryset(self) :
+        return News.objects.filter(category = self.kwargs['category_id'])
+                
 def view_news(request , news_id):
 
     context = {
@@ -47,3 +60,22 @@ def add_news(request):
     }
 
     return render(request , 'news/add_news.html' , context)
+
+# def index(request):
+
+#     context = {
+#         'news' : News.objects.all() 
+#     }
+#     return render(request , 'news/index.html' , context)
+
+# def get_category(request , category_id) : 
+    
+#     news = News.objects.filter(category=category_id)
+
+#     context = {
+#         'news' : news ,
+#     }
+
+#     return render(request , 'news/category.html' , context)
+
+
