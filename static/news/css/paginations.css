@@ -1,0 +1,31 @@
+.pagination
+{
+    display: flex;
+    justify-content: center;
+    font-family: "SourceRegular";
+    color : #1D1D1F;
+    font-size: 26px;
+    padding: 0;
+    margin: 0;
+}
+
+.card_pagination
+{
+    margin-left: 25px;
+}
+
+.card_pagination a {
+    font-family: "SourceRegular";
+    color : #1D1D1F;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.current_page a {
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+}
+
+.card_pagination a:hover:not(.active) {background-color: #ddd;}

@@ -16,8 +16,8 @@ h1,h2,p,body
 .header a 
 {
     padding-left : 20px;
-    font-family: "SourceRegular";
     font-size: 22px;
+    font-family: "SourceRegular";
     color : #1D1D1F;
     text-decoration: none;
 }
@@ -38,10 +38,9 @@ h1,h2,p,body
     width: 900px;
 }
 
-
 .card
 {
-    margin-bottom: 50px;
+    margin-bottom: 30px;
     padding: 10px;
     border: 2px solid #1D1D1F;
     border-radius: 25px;

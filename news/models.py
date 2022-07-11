@@ -6,10 +6,11 @@ class News(models.Model):
     title = models.CharField(max_length=150, verbose_name='Название')
     content = models.TextField(blank=True , verbose_name='Содержимое')
     created_at = models.DateTimeField(auto_now_add=True,verbose_name='Дата')
+    slug = models.SlugField(verbose_name='Slug' , unique=True)
     category = models.ForeignKey('Category' , on_delete= models.CASCADE , verbose_name='Категория')
 
     def get_absolute_url(self):
-        return reverse('view_news' , kwargs={"news_id" : self.pk})
+        return reverse('view_news' , kwargs={"slug" : self.slug})
 
     def __str__(self) : 
         return self.title

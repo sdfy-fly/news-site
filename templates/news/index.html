@@ -9,7 +9,11 @@
 
     <link rel="stylesheet" href="{% static 'news/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'news/css/fonts.css' %}">
-    {% block links %}{% endblock %}
+
+    {% block links %}
+    <link rel="stylesheet" href="{% static 'news/css/paginations.css' %}">
+    {% endblock %}
+
     <title>{% block title %}Main Page{% endblock %}</title>
 
 </head>
@@ -17,14 +21,14 @@
 <body>
 
     {% block header %}
-        {% include 'news/includes/_header.html' %}
+    {% include 'news/includes/_header.html' %}
     {% endblock %}
 
 
     <div class="cont">
 
         {% block sidebar %}
-            {% include 'news/includes/_sidebar.html' %}
+        {% include 'news/includes/_sidebar.html' %}
         {% endblock %}
 
         {% block content %}
@@ -46,21 +50,29 @@
     </div>
 
     {% block pagination %}
-    <div class="pagination">
-        <span class="step-links">
+
+        {% if page_obj.paginator.num_pages > 1 %}
+        <div class="pagination">
+
             {% if page_obj.has_previous %}
-                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                <div class="card_pagination previosly_page">
+                    <a href="?page={{ page_obj.previous_page_number }}"> {{page_obj.previous_page_number}}</a>
+                </div>
             {% endif %}
-    
-            <span class="current">
-                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-            </span>
-    
+
+            <div class="card_pagination current_page">
+                <a href="">{{ page_obj.number }}</a>
+            </div>
+
             {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <div class="card_pagination next_page">
+                    <a href="?page={{ page_obj.next_page_number }}"> {{ page_obj.next_page_number }}</a>
+                </div>
             {% endif %}
-        </span>
-    </div>
+
+        </div>
+        {% endif %}
+
     {% endblock %}
 
 </body>
