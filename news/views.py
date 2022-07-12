@@ -11,14 +11,14 @@ class HomeNews(ListView):
     model = News
     template_name = 'news/index.html'
     context_object_name = 'news'
-    paginate_by = 2
+    paginate_by = 3
 
     def get_context_data(self, **kwargs) :
         context =  super().get_context_data(**kwargs)
         return context
     
     def get_queryset(self) :
-        return News.objects.all()
+        return News.objects.filter(is_published = True)
 
 
 class GetCategory(ListView):
@@ -28,27 +28,19 @@ class GetCategory(ListView):
     model = News
     context_object_name = 'news'
     template_name = 'news/category.html'
-    paginate_by = 2
+    paginate_by = 3
     allow_empty = False
 
     def get_queryset(self) :
-        return News.objects.filter(category = self.kwargs['category_id'])
+        return News.objects.filter(is_published = True ,
+            category = self.kwargs['category_id'])
 
 
 class ViewNews(DetailView):
+    """Класс для отображения страницы отдельной новости - страница новости"""
     model = News
     context_object_name = 'news'
     template_name = 'news/view_news.html'
-    paginate_by = 2
-
-# def view_news(request , news_id):
-
-#     context = {
-#         # 'news' : News.objects.get(pk=news_id)
-#         'news' : get_object_or_404(News , pk=news_id)   
-#     }
-
-#     return render(request , 'news/view_news.html' , context)
 
 
 def add_news(request):
@@ -56,8 +48,8 @@ def add_news(request):
     if request.method == 'POST' :
         form = NewsForm(request.POST)
         if form.is_valid():
-            news = form.save()
-            return redirect(news)      
+            form.save()
+            return redirect('home')      
     else : 
         form = NewsForm()
     
@@ -66,6 +58,15 @@ def add_news(request):
     }
 
     return render(request , 'news/add_news.html' , context)
+
+# def view_news(request , news_id):
+#     context = {
+#         # 'news' : News.objects.get(pk=news_id)
+#         'news' : get_object_or_404(News , pk=news_id)   
+#     }
+#     return render(request , 'news/view_news.html' , context)
+
+
 
 # def index(request):
 
