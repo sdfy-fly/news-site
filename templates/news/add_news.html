@@ -6,16 +6,18 @@
     <link rel="stylesheet" href="{% static 'news/css/add_news.css' %}">
 {% endblock %}
 
+
 {% block title %}
     Add new
 {% endblock %}
 
+
 {% block sidebar %}
 {%endblock%}
 
+
 {% block content %}
     <div class="main_cards">
-   
         <div class="form_card">
             <h1>Добавление новости</h1>
             <form method="post" class="form">
@@ -27,9 +29,14 @@
         
             </form>
         </div>
-
     </div>
 {% endblock %}
+
+
+{% block js_scripts %}
+    <script src="{% static 'news/js/add_news_index.js' %}"></script>
+{% endblock %}
+
 
 {% block pagination %}
 {% endblock %}

@@ -1,5 +1,6 @@
-from django.shortcuts import render , get_object_or_404 , redirect
-from django.views.generic import ListView , DetailView
+from django.views.generic import ListView , DetailView , CreateView
+from django.urls import reverse_lazy
+
 
 from .models import News 
 from .forms import NewsForm
@@ -33,56 +34,23 @@ class GetCategory(ListView):
 
     def get_queryset(self) :
         return News.objects.filter(is_published = True ,
-            category = self.kwargs['category_id'])
+                category = self.kwargs['category_id'])
 
 
 class ViewNews(DetailView):
+
     """Класс для отображения страницы отдельной новости - страница новости"""
+
     model = News
     context_object_name = 'news'
     template_name = 'news/view_news.html'
 
 
-def add_news(request):
-    
-    if request.method == 'POST' :
-        form = NewsForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('home')      
-    else : 
-        form = NewsForm()
-    
-    context = {
-        'form' : form
-    }
+class CreateNews(CreateView):
 
-    return render(request , 'news/add_news.html' , context)
+    """Класс для добавления новости на сайт - страница с формой добавления новости"""
 
-# def view_news(request , news_id):
-#     context = {
-#         # 'news' : News.objects.get(pk=news_id)
-#         'news' : get_object_or_404(News , pk=news_id)   
-#     }
-#     return render(request , 'news/view_news.html' , context)
-
-
-
-# def index(request):
-
-#     context = {
-#         'news' : News.objects.all() 
-#     }
-#     return render(request , 'news/index.html' , context)
-
-# def get_category(request , category_id) : 
-    
-#     news = News.objects.filter(category=category_id)
-
-#     context = {
-#         'news' : news ,
-#     }
-
-#     return render(request , 'news/category.html' , context)
-
+    form_class = NewsForm
+    template_name = 'news/add_news.html'
+    success_url = reverse_lazy('home')
 
