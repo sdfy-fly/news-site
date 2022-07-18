@@ -6,7 +6,7 @@ from unidecode import unidecode
 
 class News(models.Model):
     title = models.CharField(max_length=150, verbose_name='Название')
-    content = models.TextField(blank=True , verbose_name='Содержимое')
+    content = models.TextField(verbose_name='Содержимое')
     created_at = models.DateTimeField(auto_now_add=True,verbose_name='Дата')
     slug = models.SlugField(verbose_name='Slug' , unique=True)
     category = models.ForeignKey('Category' , on_delete= models.CASCADE , verbose_name='Категория')
@@ -17,7 +17,6 @@ class News(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.pk:
-            # Newly created object, so set slug
             self.slug = slugify(unidecode(self.title))
 
         super(News, self).save(*args, **kwargs)
