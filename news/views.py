@@ -1,5 +1,9 @@
+from django.shortcuts import redirect, render
 from django.views.generic import ListView , DetailView , CreateView
 from django.urls import reverse_lazy
+
+from django.contrib.auth.models import User
+from django.contrib import messages
 
 
 from .models import News 
@@ -54,3 +58,20 @@ class CreateNews(CreateView):
     template_name = 'news/add_news.html'
     success_url = reverse_lazy('home')
 
+
+def register(request):
+    
+    if request.method == 'POST' : 
+        username = request.POST['username']
+        password = request.POST['password']
+        
+        if User.objects.filter(username = username).exists() :
+            messages.info(request, 'Username already used.')
+            return redirect('register')
+        else : 
+            user = User.objects.create_user(username=username,password=password)
+            user.save()
+            return redirect('login')
+
+
+    return render(request , 'news/register.html')

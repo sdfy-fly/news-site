@@ -17,9 +17,16 @@
 
 
 {% block content %}
+
 <div class="form_card">
+
     <h1 class="form__h1">Регистация</h1>
+
     <form method="post" class="form">
+
+        {% for message in messages %}
+            <p style="color: red">{{ message }}</p>
+        {% endfor %}
 
         {% csrf_token %}
         
@@ -39,7 +46,6 @@
 
 </div>
 {% endblock %}
-
 
 
 {% block pagination %}
