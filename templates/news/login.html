@@ -1,0 +1,64 @@
+{% extends 'news/index.html' %}
+{% load static %}
+
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'news/css/register.css' %}">
+    <link rel="stylesheet" href="{% static 'news/css/login.css' %}">
+{% endblock %}
+
+
+{% block title %}
+    Log up
+{% endblock %}
+
+
+{% block sidebar %}
+{%endblock%}
+
+
+{% block content %}
+
+<div class="form_card">
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <p class="message__text">
+                    {{ message|safe }}
+                </p>      
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+
+
+    <h1 class="form__h1">Вход</h1>
+
+    <form method="post" class="form">
+
+        {% csrf_token %}
+        
+        <p>
+            <label for="username" class="username" > Your email or username </label>
+            <input name="username" required type="text" placeholder="Type your login"/>
+        </p>
+        <p>
+            <label for="password" class="password"> Your password </label>
+            <input name="password" required type="password" placeholder="Type your password"/>
+        </p>
+
+        <button type="submit" class="form_button">Log up</button>
+
+    </form>
+    <div class="cont__link__register">
+        <a href="{% url 'register' %}" class="link__register">Нет аккаунта? Зарегистрироваться</a>
+    </div>
+
+</div>
+{% endblock %}
+
+
+{% block pagination %}
+{% endblock %}
+

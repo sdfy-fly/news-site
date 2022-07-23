@@ -71,7 +71,11 @@ def register(request):
         else : 
             user = User.objects.create_user(username=username,password=password)
             user.save()
+            messages.success(request, 'Register was successfully.')
             return redirect('login')
 
 
     return render(request , 'news/register.html')
+
+def login(request):
+    return render(request , 'news/login.html')
